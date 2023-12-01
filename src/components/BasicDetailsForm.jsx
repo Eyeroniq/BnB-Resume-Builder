@@ -11,13 +11,19 @@ import {
   SimpleGrid,
   Stack,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from 'react';
+import {  Text } from '@chakra-ui/react';
 
 const BasicDetails = (props) => {
   const { resumeInfo, setResumeInfo, setPage } = props;
-
+  const [selectedFile, setSelectedFile] = useState(null);
   const [addressSection, setAddressSection] = React.useState(false);
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
 
+  
   return (
     <Stack>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing={4} placeItems="center">
@@ -96,58 +102,153 @@ const BasicDetails = (props) => {
             Enter email address to get contacted for jobs
           </FormHelperText>
         </FormControl>
+
+
         <FormControl>
-          <FormLabel>Linkedin:</FormLabel>
+          <FormLabel>Language</FormLabel> 
           <Input
-            type="url"
-            placeholder="https://example.com"
-            pattern="https://.*"
-            value={resumeInfo.profile.linkedin}
+            type="text"
+            placeholder="English/German"
+            value={resumeInfo.profile.lang}
             onChange={(e) => {
               const updateValue = {
                 ...resumeInfo.profile,
-                linkedin: e.target.value,
+                lang: e.target.value,
               };
               const updateResumeInfo = { ...resumeInfo, profile: updateValue };
               setResumeInfo(updateResumeInfo);
             }}
           />
-        </FormControl>
+          
+        </FormControl>        
+       
+        
         <FormControl>
-          <FormLabel>Github:</FormLabel>
+          <FormLabel>Date of Birth</FormLabel> 
           <Input
-            type="url"
-            placeholder="https://example.com"
-            pattern="https://.*"
-            value={resumeInfo.profile.github}
+            type="date"
+            placeholder="dd-mm-yyyy"
+            value={resumeInfo.profile.birth}
             onChange={(e) => {
               const updateValue = {
                 ...resumeInfo.profile,
-                github: e.target.value,
+                birth: e.target.value,
               };
               const updateResumeInfo = { ...resumeInfo, profile: updateValue };
               setResumeInfo(updateResumeInfo);
             }}
           />
+          
         </FormControl>
+
         <FormControl>
-          <FormLabel>Portfolio or Website:</FormLabel>
+
+
+<FormLabel>Place of Birth / Geburtsort:</FormLabel> 
+<Input
+  type="text"
+  placeholder="Place of Birth / Geburtsort:"
+  value={resumeInfo.profile.pob}
+  onChange={(e) => {
+    const updateValue = {
+      ...resumeInfo.profile,
+      pob: e.target.value,
+    };
+    const updateResumeInfo = { ...resumeInfo, profile: updateValue };
+    setResumeInfo(updateResumeInfo);
+  }}
+/>
+
+</FormControl>
+
+        <FormControl>
+          <FormLabel>Passport Number / Reisepassnummer:</FormLabel> 
           <Input
-            type="url"
-            placeholder="https://example.com"
-            pattern="https://.*"
-            value={resumeInfo.profile.website}
+            type="text"
+            placeholder="Passport Number / Reisepassnummer:"
+            value={resumeInfo.profile.pass}
             onChange={(e) => {
               const updateValue = {
                 ...resumeInfo.profile,
-                website: e.target.value,
+                pass: e.target.value,
               };
               const updateResumeInfo = { ...resumeInfo, profile: updateValue };
               setResumeInfo(updateResumeInfo);
             }}
           />
+          
         </FormControl>
-        <FormControl style={{ display: addressSection ? "block" : "none" }}>
+        <FormControl>
+          <FormLabel>Marital Status/ Familienstand:</FormLabel> 
+          <Input
+            type="text"
+            placeholder="Marital Status/ Familienstand:"
+            value={resumeInfo.profile.mari}
+            onChange={(e) => {
+              const updateValue = {
+                ...resumeInfo.profile,
+                mari: e.target.value,
+              };
+              const updateResumeInfo = { ...resumeInfo, profile: updateValue };
+              setResumeInfo(updateResumeInfo);
+            }}
+          />
+          
+        </FormControl>
+        <FormControl>
+          <FormLabel>Computer skills / Computerkenntnisse:</FormLabel> 
+          <Input
+            type="text"
+            placeholder="Computer skills / Computerkenntnisse:"
+            value={resumeInfo.profile.CS}
+            onChange={(e) => {
+              const updateValue = {
+                ...resumeInfo.profile,
+                CS: e.target.value,
+              };
+              const updateResumeInfo = { ...resumeInfo, profile: updateValue };
+              setResumeInfo(updateResumeInfo);
+            }}
+          />
+          
+        </FormControl>
+        <FormControl>
+          <FormLabel>Hobbies / Hobbies:</FormLabel> 
+          <Input
+            type="text"
+            placeholder="Hobbies / Hobbies:"
+            value={resumeInfo.profile.hobbi}
+            onChange={(e) => {
+              const updateValue = {
+                ...resumeInfo.profile,
+                hobbi: e.target.value,
+              };
+              const updateResumeInfo = { ...resumeInfo, profile: updateValue };
+              setResumeInfo(updateResumeInfo);
+            }}
+          />
+          
+        </FormControl>
+     
+        <FormControl>
+          <FormLabel>Profile-pic</FormLabel>
+        
+          <Input
+          type="file"
+          onChange={handleFileChange}
+          colorScheme="#00b0ff"
+          w="100%"
+          rightIcon={<AddIcon />}
+        />
+        {selectedFile && (
+          <Text mt={2}>Selected file: {selectedFile.name}</Text>
+        )}
+
+
+
+        </FormControl>
+
+        <FormControl >
           <FormLabel>Address: </FormLabel>
           <Input
             type="text"
@@ -164,20 +265,10 @@ const BasicDetails = (props) => {
           />
         </FormControl>
       </SimpleGrid>
-      <Button
-        colorScheme="green"
-        onClick={() => {
-          setAddressSection(!addressSection);
-        }}
-        isDisabled={addressSection}
-        w="max-content"
-        rightIcon={<AddIcon />}
-      >
-        Add Address
-      </Button>
+    
       <Center mt={8}>
         <Button
-          colorScheme="whatsapp"
+          color="#00b0ff"
           onClick={() => {
             setPage((p) => p + 1);
           }}

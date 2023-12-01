@@ -9,11 +9,12 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useMediaQuery } from "@chakra-ui/react";
+import { useMediaQuery } from "@chakra-ui/react"; 
 import BasicDetails from "./BasicDetailsForm";
-import EduacationDetails from "./EducationDetails";
-import ProfessionalDetails from "./ProfessionalDetailsForm";
+import EducationDetails from "./Declaration";
 import ResumeTemplate from "./ResumeTemplate";
+import PersonalDetails from "./Education";
+import Educ from "./workExp";
 
 const ResumeForm = () => {
   const [page, setPage] = React.useState(0);
@@ -29,12 +30,55 @@ const ResumeForm = () => {
       github: "",
       website: "",
       address: "",
+      lang:"",
+      birth:"",
+     pod:"",
+      pass :"",                                       
+      mari:"",
+     CS:"",
+     hobbi:""
+
     },
-    professional: {
+    edu: {
+      city1:"",
+      city2:"",
+      city3:"",
+      city4:"",
+      city5:"",
+      to1:"",
+      from1:"",
+      to2:"",
+      from2:"",
+      to3:"",
+      from3:"",
+      to4:"",
+      from4:"",
+      to5:"",
+      from5:"",
+      quali:"",
+      grad:"",
       summary: "",
       skills: "",
       work: [],
     },
+    personal: {
+      birthday: "",
+      placesOf: "",
+      passport:"",
+      maritial:"",
+      gender:"",
+      computerSkills:"",
+      hobbies:"",
+      summary: "",
+      skills: "",
+      work: [],
+    },
+    Edu: {
+      summary: "",
+      skills: "",
+      work: [],
+    },
+    
     education: [],
     certification: [],
   };
@@ -42,12 +86,14 @@ const ResumeForm = () => {
   const [resumeInfo, setResumeInfo] = useState(initialState);
 
   const formPage = [
-    "Profile Details",
-    "Professional Experience",
-    "Educational Details",
+    "PERSONAL DATA/ PERSÖNLICHE ANGABEN",
+    "EDUCATIONAL QUALIFICATION / SCHULISCHE QUALIFIKATION",
+    "WORK EXPERIENCE / ARBEITSERFAHRUNG",
+    "DECLARATION /  ERKLÄRUNG",
   ];
 
   const renderForm = () => {
+   
     switch (page) {
       case 0:
         return (
@@ -57,22 +103,40 @@ const ResumeForm = () => {
             setPage={setPage}
           />
         );
-      case 1:
-        return (
-          <ProfessionalDetails
-            resumeInfo={resumeInfo}
-            setResumeInfo={setResumeInfo}
-            setPage={setPage}
-          />
-        );
-      case 2:
-        return (
-          <EduacationDetails
-            resumeInfo={resumeInfo}
-            setResumeInfo={setResumeInfo}
-            setPage={setPage}
-          />
-        );
+
+        case 1:
+          return (
+            <PersonalDetails
+              resumeInfo={resumeInfo}
+              setResumeInfo={setResumeInfo}
+              setPage={setPage}
+            />
+          );
+     
+          case 2:
+            return (
+              <Educ
+                resumeInfo={resumeInfo}
+                setResumeInfo={setResumeInfo}
+                setPage={setPage}
+              />
+            );
+           
+             
+
+
+          case 3:
+            return (
+              <EducationDetails
+                resumeInfo={resumeInfo}
+                setResumeInfo={setResumeInfo}
+                setPage={setPage}
+              />
+            );
+
+    
+    
+       
       default:
         return;
     }
@@ -81,7 +145,7 @@ const ResumeForm = () => {
   return (
     <Stack mb="50px">
       <Center
-        style={{ display: page === 3 ? "none" : "flex" }}
+        style={{ display: page === 4 ? "none" : "flex" }}
         w="100%"
         px="12px"
         flexDir="column"
@@ -91,7 +155,7 @@ const ResumeForm = () => {
         </Heading>
         <Box w="60%" borderRadius="lg">
           <Progress
-            colorScheme="whatsapp"
+            color="#00b0ff"
             value={page === 0 ? 33.3 : page === 1 ? 66.6 : 100}
           />
         </Box>
@@ -102,13 +166,13 @@ const ResumeForm = () => {
             justify="center"
             spacing={4}
             width="90%"
-            style={{ display: page === 3 ? "none" : "block" }}
+            style={{ display: page === 4 ? "none" : "block" }}
           >
             <Box
               p={8}
               borderRadius="lg"
-              bg="gray.900"
-              color="white"
+              bg="white"
+              color="gray.900te"
               boxShadow="xl"
               rounded="md"
             >
@@ -118,7 +182,7 @@ const ResumeForm = () => {
               {renderForm()}
             </Box>
           </VStack>
-          <VStack style={{ display: page === 3 ? "block" : "none" }}>
+          <VStack style={{ display: page === 4 ? "block" : "none" }}>
             <ResumeTemplate resumeInfo={resumeInfo} page={page} />
           </VStack>
         </HStack>
@@ -128,15 +192,16 @@ const ResumeForm = () => {
             justify="center"
             spacing={4}
             width="50%"
-            style={{ display: page === 3 ? "none" : "block" }}
+            style={{ display: page === 4 ? "none" : "block" }}
           >
             <Box
               p={8}
               borderRadius="lg"
-              bg="gray.900"
-              color="white"
+              bg="white"
+              color="gray.900"
               boxShadow="xl"
               rounded="md"
+              border="2px solid #e2e8f0"
             >
               <Center>
                 <Heading mb={4}>{formPage[page]}</Heading>
@@ -144,7 +209,7 @@ const ResumeForm = () => {
               {renderForm()}
             </Box>
           </VStack>
-          <VStack style={{ width: page === 3 ? "80%" : "50%" }}>
+          <VStack style={{ width: page === 4 ? "80%" : "50%" }}>
             <ResumeTemplate resumeInfo={resumeInfo} page={page} />
           </VStack>
         </HStack>

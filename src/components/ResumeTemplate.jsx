@@ -11,6 +11,7 @@ import {
   ListItem,
   StackDivider,
   Button,
+  Box,
 } from "@chakra-ui/react";
 import React from "react";
 import ReactToPrint from "react-to-print";
@@ -21,7 +22,17 @@ const ResumeTemplate = (props) => {
   const ref = React.useRef(null);
 
   return (
-    <>
+    <Box
+    p={8}
+    borderRadius="3g"
+    bg="white"
+    color="gray.900"
+    boxShadow="xl"
+    rounded="md"
+    border="2px solid #e2e8f0"
+    width="100%"  
+    height="100%"
+  >
       <Stack spacing={4} ref={ref} m={6} fontFamily="sans-serif">
         <Stack spacing={1}>
           <Center>
@@ -45,16 +56,7 @@ const ResumeTemplate = (props) => {
                   {resumeInfo.profile.email}{" "}
                 </Link>
               ) : null}
-              {resumeInfo.profile.linkedin.length ? (
-                <Link
-                  href={resumeInfo.profile.linkedin}
-                  isExternal
-                  color="blue.500"
-                >
-                  {" "}
-                  Linkedin{" "}
-                </Link>
-              ) : null}
+              
               {resumeInfo.profile.github.length ? (
                 <Link
                   href={resumeInfo.profile.github}
@@ -84,28 +86,90 @@ const ResumeTemplate = (props) => {
             </address>
           </HStack>
         </Stack>
+
+
         <VStack spacing={2} align="stretch">
           <Heading as="h3" fontSize="xl" borderBottomWidth="1px">
-            SUMMARY
+          PERSONAL DATA/ PERSÖNLICHE ANGABEN
           </Heading>
-          <Text>{resumeInfo.professional.summary}</Text>
+        
+          <Text>Language: {resumeInfo.profile.lang}</Text>
+          <Text>Birthdate / Geburtsdatum: {resumeInfo.profile.birth}</Text>
+            <Text>	Place of Birth / Geburtsort:  {resumeInfo.profile.pob} </Text>
+          	<Text>Passport Number / Reisepassnummer: {resumeInfo.profile.pass} </Text>                                          
+          	<Text>Marital Status/ Familienstand: {resumeInfo.profile.mari}</Text>
+          	<Text>Computer skills / Computerkenntnisse:{resumeInfo.profile.CS}</Text>
+              <Text>Hobbies / Hobbies: {resumeInfo.profile.hobbi}</Text> 
+             <Text>Address:  {resumeInfo.profile.address}</Text> {resumeInfo.profile.address}
+      
         </VStack>
-        <VStack spacing={4} align="stretch">
+       
+
+       
+       
+          
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+
+<VStack spacing={2} align="stretch">
           <Heading as="h3" fontSize="xl" borderBottomWidth="1px">
-            SKILLS
+          EDUCATIONAL QUALIFICATION / SCHULISCHE QUALIFIKATION
+          
           </Heading>
-          <UnorderedList px="20px">
-            {resumeInfo.professional.skills.split("\n").map((s, i) => (
-              <ListItem key={i}>{s.trim()}</ListItem>
-            ))}
-          </UnorderedList>
-        </VStack>
-        {resumeInfo.professional.work.length ? (
+        
+          <Text>{resumeInfo.edu.grad}</Text>
+          <Text>{resumeInfo.edu.city1}</Text>
+          <Text>{resumeInfo.edu.to1}</Text>
+          <Text>{resumeInfo.edu.from1}</Text>
+
+          
+          <Text>{resumeInfo.edu.quali}</Text>
+          <Text>{resumeInfo.edu.city2}</Text>
+          <Text>{resumeInfo.edu.to2}</Text>
+          <Text>{resumeInfo.edu.from2}</Text>
+
+          <Text>Qualification:- </Text>
+          <Text>{resumeInfo.edu.city3}</Text>
+          <Text>{resumeInfo.edu.to3}</Text>
+          <Text>{resumeInfo.edu.from3}</Text>
+
+          <Text>Qualification:- </Text>
+          <Text>{resumeInfo.edu.city4}</Text>
+          <Text>{resumeInfo.edu.to4}</Text>
+          <Text>{resumeInfo.edu.from4}</Text>
+
+          <Text>Qualification:- </Text>
+          <Text>{resumeInfo.edu.city5}</Text>
+          <Text>{resumeInfo.edu.to5}</Text>
+          <Text>{resumeInfo.edu.from5}</Text>
+         
+
+        
+
+</VStack>
+       
+
+       
+        {resumeInfo.Edu.work.length ? (
           <VStack spacing={4} align="stretch">
             <Heading as="h3" fontSize="xl" borderBottomWidth="1px">
               WORK EXPERIENCE
             </Heading>
-            {resumeInfo.professional.work.map((w, i) => {
+            {resumeInfo.Edu.work.map((w, i) => {
               return (
                 <VStack align="stretch" key={i}>
                   <HStack justify="space-between" align="baseline">
@@ -130,10 +194,26 @@ const ResumeTemplate = (props) => {
               );
             })}
           </VStack>
-        ) : null}
-        <VStack spacing={4} align="stretch">
+         ) : null}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       <VStack spacing={4} align="stretch">
           <Heading as="h3" fontSize="xl" borderBottomWidth="1px">
-            EDUCATION
+          WORK EXPERIENCE / ARBEITSERFAHRUNG
           </Heading>
           {resumeInfo.education.map((e, i) => {
             return (
@@ -170,12 +250,15 @@ const ResumeTemplate = (props) => {
             })}
           </VStack>
         ) : null}
+
+
+
       </Stack>
       <HStack divider={<StackDivider />} pt="24px">
         <Button
           w="max-content"
-          colorScheme="blue"
-          isDisabled={page !== 3}
+          colorScheme="messenger"
+          isDisabled={page !== 4}
           onClick={() => {
             window.location.reload();
           }}
@@ -186,18 +269,18 @@ const ResumeTemplate = (props) => {
           <ReactToPrint
             trigger={() => (
               <Button
-                colorScheme="whatsapp"
+                colorScheme="messenger"
                 w="max-content"
-                isDisabled={page !== 3}
+                isDisabled={page !== 4}
               >
-                Print this out!
+                View
               </Button>
             )}
             content={() => ref.current}
           />
         </div>
       </HStack>
-    </>
+      </Box>
   );
 };
 
